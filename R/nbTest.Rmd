@@ -1,0 +1,42 @@
+---
+title: "Statistics"
+output: html_notebook
+---
+
+
+
+
+```{r}
+#Normal Distribution
+pnorm(1.22, 0, 1)
+pnorm(1.22, 0, 1, lower.tail = FALSE)
+dnorm(0)
+pnorm(2.24) - pnorm(-1.58)
+dnorm(1.22, 0, 1)
+pnorm(2) - pnorm(-2)
+
+pnorm(2, 5, 3) #<=
+pnorm(4, 5, 3, lower.tail = FALSE) #> or 1-pnorm(4,5,3)
+
+pnorm(4,5,3) - pnorm(2, 5, 3)
+
+pnorm(7,5,3)
+qnorm(0.75, 5,3) # The first argument is an area. It's how we find x point 
+
+pnorm(70, 75, 5)
+qnorm(0.8, 75, 5) #or 
+qnorm(0.2, 75, 5, lower.tail=F)
+qnorm(0.05, 75, 5)
+qnorm(0.3, 75, 5) #30 percentile
+
+# mean = 348 sd = 80 #last >= 180
+pnorm(180, 348, 80)
+
+# mean = 1.20 st = 0.005 #  1.19 < x < 1.21
+pnorm(1.21, 1.20, 0.005) - pnorm(1.19, 1.20, 0.005)
+
+
+
+```
+
+

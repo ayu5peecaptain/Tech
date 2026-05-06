@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Hub</title>
+  <link rel="icon" href="https://www.google.com/s2/favicons?domain=notion.so&sz=64" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #f7f7f5;
+      --surface: #ffffff;
+      --border: #e8e8e5;
+      --border-hover: #c8c8c4;
+      --text-primary: #1a1a18;
+      --text-secondary: #888884;
+      --text-tertiary: #b0b0aa;
+      --shadow-hover: 0 8px 24px rgba(0,0,0,0.08);
+      --badge-school-bg: #e8f0fe;
+      --badge-school-fg: #3c5fbd;
+      --badge-learn-bg: #e6f4ea;
+      --badge-learn-fg: #2d7a3e;
+      --badge-practice-bg: #fef3e2;
+      --badge-practice-fg: #b06a00;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111110;
+        --surface: #1c1c1a;
+        --border: #2a2a28;
+        --border-hover: #444440;
+        --text-primary: #f0f0ee;
+        --text-secondary: #666662;
+        --text-tertiary: #444440;
+        --shadow-hover: 0 8px 24px rgba(0,0,0,0.3);
+        --badge-school-bg: #1a2340;
+        --badge-school-fg: #7a9ff5;
+        --badge-learn-bg: #1a2e1e;
+        --badge-learn-fg: #6abf7a;
+        --badge-practice-bg: #2e2010;
+        --badge-practice-fg: #f0a830;
+      }
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 3rem;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1100px;
+    }
+
+    /* Header */
+    .hub-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .hub-emoji {
+      font-size: 3rem;
+      margin-bottom: 14px;
+      display: block;
+    }
+    .hub-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 2.8rem;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      letter-spacing: -1px;
+    }
+    .hub-sub {
+      font-size: 15px;
+      color: var(--text-secondary);
+      font-weight: 300;
+    }
+
+    /* Section */
+    .section { margin-bottom: 3rem; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+    .section-line {
+      flex: 1;
+      height: 0.5px;
+      background: var(--border);
+    }
+    .section-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+
+    /* Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
+    }
+
+    /* Card */
+    .card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 20px;
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: 16px;
+      text-decoration: none;
+      color: var(--text-primary);
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .icon-wrap {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: var(--bg);
+      border: 0.5px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .favicon {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+    }
+
+    .card-text { flex: 1; min-width: 0; }
+    .card-name {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 3px;
+    }
+    .card-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .badge {
+      font-size: 9px;
+      font-weight: 600;
+      padding: 3px 9px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+    .badge-school   { background: var(--badge-school-bg);   color: var(--badge-school-fg); }
+    .badge-learn    { background: var(--badge-learn-bg);    color: var(--badge-learn-fg); }
+    .badge-practice { background: var(--badge-practice-bg); color: var(--badge-practice-fg); }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      margin-top: 4rem;
+      font-size: 11px;
+      color: var(--text-tertiary);
+      letter-spacing: 0.5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="hub-header">
+      <span class="hub-emoji">⚡</span>
+      <div class="hub-title">My Hub</div>
+      <div class="hub-sub">Everything you need, in one place</div>
+    </div>
+
+    <!-- School -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-line"></div>
+        <div class="section-title">School</div>
+        <div class="section-line"></div>
+      </div>
+      <div class="grid">
+        <a href="https://canvas.instructure.com/" target="_blank" class="card">
+          <div class="icon-wrap"><img class="favicon" src="https://www.google.com/s2/favicons?domain=canvas.instructure.com&sz=32" /></div>
+          <div class="card-text">
+            <div class="card-name">Canvas</div>
+            <div class="card-desc">Assignments & grades</div>
+          </div>
+          <span class="badge badge-school">LMS</span>
+        </a>
+        <a href="https://skyplus.muic.io/" target="_blank" class="card">
+          <div class="icon-wrap"><img class="favicon" src="https://www.google.com/s2/favicons?domain=skyplus.muic.io&sz=32" /></div>
+          <div class="card-text">
+            <div class="card-name">SkyPlus MUIC</div>
+            <div class="card-desc">Student portal</div>
+          </div>
+          <span class="badge badge-school">Portal</span>
+        </a>
+        <a href="https://muicelearning.mahidol.ac.th/" target="_blank" class="card">
+          <div class="icon-wrap"><img class="favicon" src="https://www.google.com/s2/favicons?domain=muicelearning.mahidol.ac.th&sz=32" /></div>
+          <div class="card-text">
+            <div class="card-name">MUIC eLearning</div>
+            <div class="card-desc">Course materials</div>
+          </div>
+          <span class="badge badge-school">MUIC</span>
+        </a>
+        <a href="https://classroom.google.com/u/1/" target="_blank" class="card">
+          <div class="icon-wrap"><img class="favicon" src="https://www.google.com/s2/favicons?domain=classroom.google.com&sz=32" /></div>
+          <div class="card-text">
+            <div class="card-name">Classroom</div>
+            <div class="card-desc">Class activities</div>
+          </div>
+          <span class="badge badge-school">Google</span>
+        </a>
+        <a href="https://calendar.google.com/calendar/u/0/r" target="_blank" class="card">
+          <div class="icon-wrap"><img class="favicon" src="https://www.google.com/s2/favicons?domain=calendar.google.com&sz=32" /></div>
+          <div class="card-text">
+            <div class="card-name">Calendar</div>
+            <div class="card-desc">Schedule & deadlines</div>
+          </div>
+          <span class="badge badge-school">Google</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Learning -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-line"></div>
+        <div class="section-title">Learning</div>
+        <div class="section-line"></div>
+      </div>
+      <div class="grid">
+        <a href="https://www.codecademy.com/learn" target="_blank" class="card">
+          <div class="icon-wrap"><img class="favicon" src="https://www.google.com/s2/favicons?domain=codecademy.com&sz=32" /></div>
+          <div class="card-text">
+            <div class="card-name">Codecademy</div>
+            <div class="card-desc">Structured courses</div>
+          </div>
+          <span class="badge badge-learn">Code</span>
+        </a>
+        <a href="https://brilliant.org/courses/pre-algebra/solving-by-substitution/" target="_blank" class="card">
+          <div class="icon-wrap"><img class="favicon" src="https://www.google.com/s2/favicons?domain=brilliant.org&sz=32" /></div>
+          <div class="card-text">
+            <div class="card-name">Brilliant</div>
+            <div class="card-desc">Math & logic</div>
+          </div>
+          <span class="badge badge-learn">Math</span>
+        </a>
+        <a href="https://notebooklm.google.com/?icid=home_maincta&authuser=1&pageId=none" target="_blank" class="card">
+          <div class="icon-wrap"><img class="favicon" src="https://www.google.com/s2/favicons?domain=notebooklm.google.com&sz=32" /></div>
+          <div class="card-text">
+            <div class="card-name">NotebookLM</div>
+            <div class="card-desc">AI study assistant</div>
+          </div>
+          <span class="badge badge-learn">AI</span>
+        </a>
+        <a href="https://quizlet.com/user/ayu5peecaptain/folders/172810294" target="_blank" class="card">
+          <div class="icon-wrap"><img class="favicon" src="https://www.google.com/s2/favicons?domain=quizlet.com&sz=32" /></div>
+          <div class="card-text">
+            <div class="card-name">Quizlet</div>
+            <div class="card-desc">Flashcards & recall</div>
+          </div>
+          <span class="badge badge-learn">Recall</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Practice -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-line"></div>
+        <div class="section-title">Practice</div>
+        <div class="section-line"></div>
+      </div>
+      <div class="grid">
+        <a href="https://www.hackerrank.com/dashboard" target="_blank" class="card">
+          <div class="icon-wrap"><img class="favicon" src="https://www.google.com/s2/favicons?domain=hackerrank.com&sz=32" /></div>
+          <div class="card-text">
+            <div class="card-name">HackerRank</div>
+            <div class="card-desc">Bash & shell challenges</div>
+          </div>
+          <span class="badge badge-practice">Shell</span>
+        </a>
+        <a href="https://nihonez.com/jlpt-n5-test/" target="_blank" class="card">
+          <div class="icon-wrap"><img class="favicon" src="https://www.google.com/s2/favicons?domain=nihonez.com&sz=32" /></div>
+          <div class="card-text">
+            <div class="card-name">JLPT N5 Test</div>
+            <div class="card-desc">Japanese practice</div>
+          </div>
+          <span class="badge badge-practice">日本語</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer">Built for Thatchaphon · MUIC CS Year 2</div>
+
+  </div>
+</body>
+</html>
